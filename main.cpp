@@ -96,20 +96,45 @@ class Screen{
         std::cout << fcolors[code];
     }
 
+    void flush(){
+        std::cout.flush();
+    }
+
 };
+
+#include <stdlib.h> 
+#include <unistd.h>
 
 int main(){ 
     Screen s;
     s.clear(); 
     
-    //std::cout << s.getHight() << " " << s.getWidth() << std::endl;
+    int i = 0;
 
-    s.move(10, 5);
-    s.bcolor(red); 
-    std::cout << "     ";
-    s.bcolor(norm);
-    s.move(0, -5);
-    s.move(-10, -5);
+    unsigned int microseconds = 10000u;
+    while(true){
+        int x = rand() % s.getWidth();
+        int y = rand() % s.getHight();
+
+        s.moveTo(x, y);
+        s.bcolor(rand() % 5);
+        std::cout << " ";
+        s.bcolor(norm);
+        
+        s.moveTo(0, 0);
+        std::cout << i++;
+        
+        s.flush();        
+
+        usleep(microseconds);
+    }
+
+    //s.move(10, 5);
+    //s.bcolor(red); 
+    //std::cout << "     ";
+    //s.bcolor(norm);
+    //s.move(0, -5);
+    //s.move(-10, -5);
     
     //http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x361.html
     //https://stackoverflow.com/questions/38770996/linux-moving-the-console-cursor-visual
