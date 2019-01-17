@@ -18,10 +18,17 @@ class Screen{
 
     std::vector<std::string> fcolors;
     std::vector<std::string> bcolors;
-    
+    int h;
+    int w;
+
     public:
 
     Screen(){
+        struct winsize wi;
+        ioctl(STDOUT_FILENO, TIOCGWINSZ, &wi);
+        h = wi.ws_row;
+        w = wi.ws_col;
+
         this->fcolors.push_back("\e[39m"); //Normal
         this->fcolors.push_back("\e[31m"); //Red
         this->fcolors.push_back("\e[32m"); //Green
@@ -37,6 +44,14 @@ class Screen{
         this->bcolors.push_back("\e[44m"); //Blue
         this->bcolors.push_back("\e[45m"); //Magenta
         this->bcolors.push_back("\e[46m"); //Cyan
+    }
+
+    int getHight(){
+        return h;
+    } 
+
+    int getWidth(){
+        return w;
     }
 
     void move(int x, int y){
@@ -85,13 +100,10 @@ class Screen{
 
 int main(){ 
     Screen s;
-    s.clear();
+    s.clear(); 
     
-    struct winsize w;
-    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+    //std::cout << s.getHight() << " " << s.getWidth() << std::endl;
 
-    //std::cout << w.ws_row << "    " << w.ws_col << std::endl;
-     
     s.move(10, 5);
     s.bcolor(red); 
     std::cout << "     ";
