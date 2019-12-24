@@ -38,7 +38,7 @@ class Screen{
         this->fcolors.push_back("\e[34m"); //Blue
         this->fcolors.push_back("\e[35m"); //Magenta
         this->fcolors.push_back("\e[36m"); //Cyan
-        
+
         this->bcolors.push_back("\e[49m"); //Normal
         this->bcolors.push_back("\e[41m"); //Red
         this->bcolors.push_back("\e[42m"); //Green
@@ -50,7 +50,7 @@ class Screen{
 
     int getHight(){
         return h;
-    } 
+    }
 
     int getWidth(){
         return w;
@@ -59,13 +59,13 @@ class Screen{
     void move(int x, int y){
         if(x < 0)
             std::cout << "\033[" << -x << "D";
-        
+
         if(x > 0)
             std::cout << "\033[" << x << "C";
 
         if(y < 0)
             std::cout << "\033[" << -y << "B";
-        
+
         if(y > 0)
             std::cout << "\033[" << y << "A";
     }
@@ -93,7 +93,7 @@ class Screen{
     void bcolor(int code){
         std::cout << bcolors[code];
     }
-    
+
     void fcolor(int code){
         std::cout << fcolors[code];
     }
