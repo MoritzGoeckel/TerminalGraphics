@@ -4,17 +4,18 @@
 #include <thread>
 #include <functional>
 
+template<typename Fn>
 class UpdateLoop{
     private:
     int framerate;
     bool isStop;
-    std::function<void()>& todo; // TODO: Better use templating
+    Fn task;
 
     void startLoop(){
         int desiredWait = 1000 / this->framerate;
         while(!isStop){
             auto start = std::chrono::steady_clock::now();
-            todo();
+            task();
             auto end = std::chrono::steady_clock::now();
             int elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
             int waiting = desiredWait - elapsed;
@@ -25,7 +26,7 @@ class UpdateLoop{
     }
 
     public:
-    UpdateLoop(int framerate, std::function<void()>& fn) : todo(fn){
+    UpdateLoop(int framerate, Fn& task) : task(task){
         this->framerate = framerate;
         this->isStop = false;
         this->startLoop();

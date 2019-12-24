@@ -13,7 +13,7 @@ int main(){
     s.clear();
 
     int i = 0;
-    std::function<void()> fn = [&s, &i](){
+    auto fn = [&s, &i](){
         int x = rand() % s.getWidth();
         int y = rand() % s.getHight();
 
@@ -28,7 +28,7 @@ int main(){
         s.flush();
     };
 
-    UpdateLoop l(30, fn);
+    UpdateLoop<typeof(fn)> l(30, fn);
 
     //http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x361.html
     //https://stackoverflow.com/questions/38770996/linux-moving-the-console-cursor-visual
