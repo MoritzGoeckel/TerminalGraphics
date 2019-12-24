@@ -3,8 +3,6 @@
 #include <string>
 #include <stdlib.h>
 
-#include <functional>
-
 #include "Screen.cpp"
 #include "UpdateLoop.cpp"
 
