@@ -5,10 +5,24 @@
 
 #include "Screen.cpp"
 #include "UpdateLoop.cpp"
+#include "Matrix.cpp"
+#include "Point.cpp"
+
+void drawMatrix(Screen& screen,
+                Matrix<int>& matrix,
+                Point& p){
+    // Calculate diff from new matrix to old matrix
+    // Generate the screen commands
+}
 
 int main(){
     Screen s;
     s.clear();
+
+    Matrix<int> sp(10, 5, 0);
+    sp.set(4, 2, 1);
+    sp.set(5, 2, 1);
+    sp.set(5, 3, 1);
 
     int i = 0;
     auto fn = [&s, &i](){
