@@ -1,21 +1,19 @@
-#include <iostream>
-#include <sys/ioctl.h>
-#include <string>
 #include <stdlib.h>
+#include <sys/ioctl.h>
+#include <iostream>
+#include <string>
 
-#include "Screen.cpp"
-#include "UpdateLoop.cpp"
 #include "Matrix.cpp"
 #include "Point.cpp"
+#include "Screen.cpp"
+#include "UpdateLoop.cpp"
 
-void drawMatrix(Screen& screen,
-                Matrix<int>& matrix,
-                Point& p){
+void drawMatrix(Screen& screen, Matrix<int>& matrix, Point& p) {
     // Calculate diff from new matrix to old matrix
     // Generate the screen commands
 }
 
-int main(){
+int main() {
     Screen s;
     s.clear();
 
@@ -25,14 +23,14 @@ int main(){
     sp.set(5, 3, 1);
 
     int i = 0;
-    auto fn = [&s, &i](){
-        int x = rand() % s.getWidth();
-        int y = rand() % s.getHight();
+    auto fn = [&s, &i]() {
+        int x = rand() % s.width();
+        int y = rand() % s.height();
 
         s.moveTo(x, y);
         s.bcolor(rand() % 5);
         std::cout << " ";
-        s.bcolor(norm);
+        s.bcolor(COLOR::NORMAL);
 
         s.moveTo(0, 0);
         std::cout << i++;
@@ -41,9 +39,6 @@ int main(){
     };
 
     UpdateLoop<typeof(fn)> l(30, fn);
-
-    //http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x361.html
-    //https://stackoverflow.com/questions/38770996/linux-moving-the-console-cursor-visual
 
     return 0;
 }
