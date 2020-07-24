@@ -3,10 +3,10 @@
 #include <iostream>
 #include <string>
 
-#include "Matrix.cpp"
-#include "Point.cpp"
-#include "Screen.cpp"
-#include "UpdateLoop.cpp"
+#include "Matrix.h"
+#include "Point.h"
+#include "Screen.h"
+#include "UpdateLoop.h"
 
 void drawMatrix(Screen& screen, Matrix<int>& matrix, Point& p) {
     // Calculate diff from new matrix to old matrix
