@@ -24,12 +24,15 @@ int main() {
 
     int i = 0;
     auto fn = [&s, &i]() {
-        int x = rand() % s.width();
+        int x = ((rand() % s.width()) / 2) * 2;
         int y = rand() % s.height();
 
         s.moveTo(x, y);
-        s.bcolor(rand() % 5);
+        s.bcolor((rand() % 4) + 1);
         std::cout << " ";
+        if (x < s.width() - 1) {
+            std::cout << " ";
+        }
         s.bcolor(COLOR::NORMAL);
 
         s.moveTo(0, 0);
@@ -38,7 +41,7 @@ int main() {
         s.flush();
     };
 
-    UpdateLoop<typeof(fn)> l(30, fn);
+    UpdateLoop<typeof(fn)> l(1000, fn);
 
     return 0;
 }
